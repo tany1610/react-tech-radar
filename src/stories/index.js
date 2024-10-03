@@ -254,8 +254,6 @@ storiesOf('Basics', module)
                 showOnlyFirstQuadrantLabels : true,
                 textMargin : 0,
                 textYOffset : -5
-
-
             }}
             fontFamily={"fantasy"}/>
     )

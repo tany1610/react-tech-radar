@@ -1,16 +1,16 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import Text from "../Text/Text";
 import Path from "../Path/Path";
 import Line from "../Line/Line";
 import Item from "../Item/Item";
-import {QuadrantWrapper} from "./Quadrant.style";
-import {ThemeContext} from "../theme-context";
+import { QuadrantWrapper } from "./Quadrant.style";
+import { ThemeContext } from "../theme-context";
 import PropTypes from "prop-types";
 
 function Quadrant(props) {
 
     //context variables
-    const {fontSize, fontFamily, colorScale, quadrantsConfig :{ textMargin, textYOffset, showOnlyFirstQuadrantLabels }} = useContext(ThemeContext);
+    const { fontSize, fontFamily, colorScale, quadrantsConfig: { textMargin, textYOffset } } = useContext(ThemeContext);
 
     //optional variables
     const radiusDiminishConstant = props.radiusDiminish;
@@ -89,7 +89,9 @@ function Quadrant(props) {
                 const title = ringIndex === props.rings.length - 1 ? props.name : null;
 
                 const leftMargin = textMargin ?? (40 * (radiuses[ringIndex + 1] - radiuses[ringIndex]));
-                const showLabel = showOnlyFirstQuadrantLabels? props.index === 0 : true;
+                const showLabel = props.index === 0 || props.index === 2;
+                const transformText = props.index === 2 ? true : false;
+
                 return (
                     <g key={props.index + "-" + ringIndex}>
                         {showLabel && <Text
@@ -98,6 +100,7 @@ function Quadrant(props) {
                             dy={textYOffset}
                             fontSize={fontSize}
                             fontFamily={fontFamily}
+                            transform={transformText}
                         />}
                         <Path
                             quadIndex={props.index}
@@ -113,13 +116,13 @@ function Quadrant(props) {
                 )
             })}
             {props.points.map((value, index) => {
-                    return (
-                        <Item
-                            rotateDegrees={-props.rotateDegrees}
-                            key={index}
-                            data={value}/>
-                    )
-                }
+                return (
+                    <Item
+                        rotateDegrees={-props.rotateDegrees}
+                        key={index}
+                        data={value} />
+                )
+            }
             )}
 
         </QuadrantWrapper>

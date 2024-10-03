@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import {RadarContents} from "./Radar.style";
 import PropTypes from 'prop-types';
 
@@ -20,9 +20,6 @@ const DEFAULT_WIDTH = 700;
 //radius of rings diminish as they move away from the center
 const RADIUS_DIMINISH_CONSTANT = 1.5;
 
-//extend width to right so that overflow text would be visible
-const RIGHT_EXTENSION = 1.1;
-
 function Radar(props) {
 
     //manage optional variables
@@ -30,15 +27,16 @@ function Radar(props) {
     const rings = props.rings || [""];
     const radiusDiminishConstant = props.radiusDiminish || RADIUS_DIMINISH_CONSTANT;
     const data = props.data || [];
+
     if (data.length === 0) {
         console.log("No Data Provided")
     }
 
     //context variables
-    const {fontSize, fontFamily, colorScale} = useContext(ThemeContext);
+    const {fontSize, fontFamily, colorScale, quadrantsConfig} = useContext(ThemeContext);
 
     //margin of radar
-    const margin = props.margin || 5;
+    const margin = props.margin || 10;
 
     //some internally used constants
     const angle = 360 / props.quadrants.length;
@@ -90,7 +88,8 @@ function Radar(props) {
                 name: entry.name,
                 quadrant: entry.quadrant,
                 x: coordinates.x,
-                y: coordinates.y
+                y: coordinates.y,
+                label: entry.label
             };
 
             results.push(blip);
@@ -204,10 +203,10 @@ function Radar(props) {
             itemFontSize: props.itemFontSize || props.fontSize || fontSize,
             fontFamily: props.fontFamily || fontFamily,
             colorScale: props.colorScaleIndex ? getColorScale(props.colorScaleIndex) : colorScale,
-            quadrantsConfig : props.quadrantsConfig || {}
+            quadrantsConfig : quadrantsConfig,
         }}>
             <RadarContents
-                width={width * RIGHT_EXTENSION}
+                width={width}
                 height={width}
                 style={{margin: margin}}
             >

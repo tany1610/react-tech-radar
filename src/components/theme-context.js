@@ -34,5 +34,5 @@ export const ThemeContext = React.createContext({
     fontFamily: DEFAULT_FONT_FAMILY,
     fontSize: DEFAULT_FONT_SIZE,
     itemFontSize: DEFAULT_FONT_SIZE,
-    quadrantsConfig : {}
+    quadrantsConfig : { textMargin: "0", textYOffset: "-7" }
 });

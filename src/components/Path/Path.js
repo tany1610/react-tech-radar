@@ -1,16 +1,11 @@
-import React, {useContext} from 'react';
-import {rgb as d3rgb } from 'd3-color';
+import React from 'react';
 import {arc as d3arc } from 'd3-shape';
-import {ThemeContext} from "../theme-context";
 import PropTypes from "prop-types";
 
 function Path(props) {
-
-    //context variables
-    const {fontSize, fontFamily, colorScale} = useContext(ThemeContext);
-
-    const rgb = d3rgb(colorScale(props.quadIndex));
-    const fill = rgb.brighter(props.ringIndex / props.ringsLength * 0.9);
+    const fill = "#FFFFFF"; // Setting the fill color to always be white
+    const stroke = "#000000"; // Setting the stroke color to black
+    const strokeWidth = 1; // Adjust the stroke width as needed
     const uniquePathId = props.quadIndex + "-" + props.ringIndex;
 
     const archFunction = () => {
@@ -34,20 +29,10 @@ function Path(props) {
             <path id={uniquePathId} className={"quadrant"}
                   d={archFunction()()}
                   fill={fill}
+                  stroke={stroke} // Adding black border
+                  strokeWidth={strokeWidth} // Defining the border thickness
             >
             </path>
-
-            {props.title &&
-            <text
-                dx={props.ringWidth / 2}
-                fontSize={fontSize}
-                fontFamily={fontFamily}
-            >
-                <textPath href={'#' + uniquePathId}>
-                    {props.title}
-                </textPath>
-            </text>
-            }
         </g>
     )
 }

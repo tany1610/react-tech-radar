@@ -1,0 +1,59 @@
+.app-wrapper {
+    display: grid;
+
+    .app-header {
+        margin: auto;
+        display: grid;
+        grid-auto-flow: row;
+        grid-template-columns: 1fr;
+        margin-bottom: 10px;
+    }
+
+    .upload-btn {
+        width: 100px;
+        margin: auto;
+    }
+
+    .radar-wrapper {
+        position: relative;
+        margin: auto;
+        background-color: #edf1f3;
+
+        .radar-quadrant-text {
+            position: absolute;
+        
+            &:nth-child(1) {
+                right: 10px;
+                bottom: 5px;
+            }
+
+            &:nth-child(2) {
+                left: 10px;
+                bottom: 5px;
+            }
+
+            &:nth-child(3) {
+                left: 10px;
+                top: 5px;
+            }
+
+            &:nth-child(4) {
+                right: 10px;
+                top: 5px;
+            }
+        }
+    }
+
+    .app-legend {
+        .app-legend-header {
+            margin: auto;
+            text-align: center;
+        }
+
+        .app-legend-content {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: space-evenly;
+        }
+    }
+}  
